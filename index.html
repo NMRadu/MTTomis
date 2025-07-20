@@ -117,6 +117,52 @@
                 </div>
             </div>
         </section><!-- services -->
+</section><!-- services -->
+
+        <!-- Program Section -->
+        <section id="program" class="program-area">
+            <div class="container">
+                <h2 class="block_title">Program Curse</h2>
+                <div class="row" style="justify-content:center;">
+                    <div class="col-md-12" style="display:flex;flex-wrap:wrap;gap:24px;justify-content:center;">
+                        <button class="program-btn" data-img="program/Bistret-Craiova.png">Bistret - Craiova</button>
+                        <button class="program-btn" data-img="program/Covei-Craiova.png">Covei - Craiova</button>
+                        <button class="program-btn" data-img="program/Craiova-Bistret.png">Craiova - Bistret</button>
+                        <button class="program-btn" data-img="program/Craiova-Covei.png">Craiova - Covei</button>
+                        <button class="program-btn" data-img="program/Craiova-Sapata.png">Craiova - Sapata</button>
+                        <button class="program-btn" data-img="program/Sapata-Craiova.png">Sapata - Craiova</button>
+                        <style>
+                        .program-btn {
+                            background: linear-gradient(90deg, #232526 0%, #414345 100%);
+                            color: #fff;
+                            border: none;
+                            border-radius: 16px;
+                            box-shadow: 0 2px 12px rgba(33,33,33,0.10);
+                            padding: 18px 36px;
+                            font-size: 1.15em;
+                            font-family: 'Raleway', 'Lato', sans-serif;
+                            font-weight: 500;
+                            margin-bottom: 8px;
+                            cursor: pointer;
+                            transition: box-shadow 0.2s, transform 0.2s, background 0.2s;
+                            letter-spacing: 0.5px;
+                        }
+                        .program-btn:hover, .program-btn:focus {
+                            background: linear-gradient(90deg, #414345 0%, #232526 100%);
+                            box-shadow: 0 4px 24px rgba(33,33,33,0.18);
+                            transform: translateY(-2px) scale(1.04);
+                            outline: none;
+                        }
+                        </style>
+                    </div>
+                </div>
+            </div>
+            <!-- Program Modal -->
+            <div id="program-modal" class="" tabindex="-1" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.7);z-index:9999;align-items:center;justify-content:center;">
+                <span id="program-close" style="position:absolute;top:32px;right:48px;font-size:2.5em;color:#fff;cursor:pointer;z-index:10001;">&times;</span>
+                <img id="program-img" src="" alt="Orar cursă" style="max-width:90vw;max-height:80vh;border-radius:12px;box-shadow:0 2px 24px rgba(0,0,0,0.25);">
+            </div>
+        </section><!-- program -->
 
         <!-- Portfolio Area -->
 
@@ -242,6 +288,22 @@
         <script src="assets/js/smooth-scroll.js"></script>
         <script src="assets/js/owl.carousel.js"></script>
         <script src="assets/js/script.js"></script>
+        <script>
+        // Program modal functionality
+        $(document).ready(function(){
+            $('.program-btn').on('click', function(){
+                var src = $(this).data('img');
+                $('#program-img').attr('src', src);
+                $('#program-modal').css('display', 'flex').addClass('active');
+            });
+            $('#program-close, #program-modal').on('click', function(e){
+                if(e.target === this) {
+                    $('#program-modal').css('display', 'none').removeClass('active');
+                    $('#program-img').attr('src', '');
+                }
+            });
+        });
+        </script>
         <script>
         // Lightbox functionality for galerie auto
         $(document).ready(function(){
