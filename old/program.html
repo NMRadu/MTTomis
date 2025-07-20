@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>    
+<body>
+        <div class="header">
+            <div class="left-header">
+                M&T Tomis
+            </div>
+            <div class="right-header">
+                    <div id="programDiv" class="option">Program</div>
+                    <div class="option">Contact</div>
+                    <div class="option">Excursii</div>
+            </div>
+        </div>
+        <div style="width: 90%; padding-left: 4%; margin-top: 3%; display: flex; flex-direction: column;">
+            <div style="font-size: 1.1vw;">Locul de placare</div>
+            <select name="plecare" id="plecare">
+                <option disabled selected value="">Selecteaza locul de plecare</option>
+                <option value="0">Barca</option>
+                <option value="1">Bistret</option>
+                <option value="2">Calopar</option>
+                <option value="3">Carna</option>
+                <option value="4">Catane</option>
+                <option value="5">Cerat</option>
+                <option value="6">Covei</option>
+                <option value="7">Craiova</option>
+                <option value="8">Giurgita</option>
+                <option value="9">Goicea</option>
+                <option value="10">Macesu de Sus</option>
+                <option value="11">Plosca</option>
+                <option value="12">Sapata</option>
+                <option value="13">Segarcea</option>
+            </select>
+            <div id="sosireText" class="disabled" style="font-size: 1.1vw; margin-top: 2%">Locul de sosire</div>
+            <select name="sosire" class="disabled" id="sosire">
+            </select>
+            <button id="trigger">Cauta</button>
+            <div id="tableSpace" style="width:100%; display: flex; flex-direction: column; align-items: center; margin-top: 3%;">
+                <h2 id="titlu"></h2>
+                <table>
+                    <tr id="lv">
+                    </tr>
+                    <tr id="sd">
+                    </tr>
+                </table>
+            
+            </div>
+        </div>
+    </body>
+    <style>
+        body{
+            margin: 0;
+            overflow-x: hidden;
+        }
+        .header {
+            width: 100%;
+            height: 8vh;
+            background-color: red;
+            display: flex;
+
+        }
+        .title{
+            background-image: url("images/title2.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            height: 80vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+        .left-header{
+            width: 48%;
+            margin-left: 2%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            color: white!important;
+            font-size: calc(15px + 0.390625vw);
+        }
+        .right-header{
+            width: 48%;
+            height: 100%;
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            color: white!important;
+            font-size: calc((15px + 0.390625vw)*0.7);
+        }
+        .select-slot{
+            display: flex;
+            justify-content: space-between;
+            height: 100%;width: 29%;
+            align-items: center;
+        }
+        .option{
+            margin-right: 5px;
+        }
+        .option:hover{
+            color: rgb(0, 0, 0)!important;
+            cursor: pointer;
+        }
+        select{
+            width: 14%;
+            border-radius: 10px;
+            height: 3.5vh;
+            font-size: 0.9vw;
+            margin-top: 0.5%;
+        }
+        .disabled {
+            opacity: 0.2; 
+            pointer-events: none; 
+            cursor: not-allowed;
+        }
+
+        button{
+            width: 10%;
+            height: 3vh;
+            margin-top: 3%;
+            border: 1px solid gray;
+            background-color: white;
+            border-radius: 20px;
+        }
+
+        button:hover{
+            background-color: red;
+            border: 1px solid black;
+        }
+
+        /* Reset some default table styles */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        /* Style the table header */
+        th {
+            background-color: #f2f2f2;
+            text-align: left;
+            padding: 10px;
+        }
+
+        /* Style table cells */
+         td {
+            padding: 10px;
+        }
+
+
+    </style>
+    <script>
+        localitati = ['Barca','Bistret','Calopar','Carna','Catane','Cerat','Covei','Craiova','Giurgita','Goicea','Macesu de Sus', 'Plosca', 'Sapata','Segarcea']
+        ore = [
+            // Barca
+            [
+                [],// Barca
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Bistret
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Calopar
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Carna
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Catane
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Cerat
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Covei
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Craiova
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Giurgita
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Goicea
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Macesu de sus
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Plosca
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Sapata
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Segarcea
+            ],
+            // Bistret
+            [
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],// Barca
+                [],//Bistret
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Calopar
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Carna
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Catane
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Cerat
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Covei
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Craiova
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Giurgita
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Goicea
+                [],//Macesu de sus
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Plosca
+                [],//Sapata
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Segarcea
+            ],
+            // Calopar
+            [
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],// Barca
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Bistret
+                [],//Calopar
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Carna
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Catane
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Cerat
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Covei
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Craiova
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Giurgita
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Goicea
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Macesu de sus
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Plosca
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Sapata
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Segarcea
+            ],
+            // Carna
+            [
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],// Barca
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Bistret
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Calopar
+                [],//Carna
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Catane
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Cerat
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Covei
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Craiova
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Giurgita
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Goicea
+                [],//Macesu de sus
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Plosca
+                [],//Sapata
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Segarcea
+            ],
+            // Catane
+            [
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],// Barca
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Bistret
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Calopar
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Carna
+                [],//Catane
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Cerat
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Covei
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Craiova
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Giurgita
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Goicea
+                [],//Macesu de sus
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Plosca
+                [],//Sapata
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Segarcea
+            ],
+            // Cerat
+            [
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],// Barca
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Bistret
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Calopar
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Carna
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Catane
+                [],//Cerat
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Covei
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Craiova
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Giurgita
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Goicea
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Macesu de sus
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Plosca
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Sapata
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Segarcea
+            ],
+            // Covei
+            [
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],// Barca
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Bistret
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Calopar
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Carna
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Catane
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Cerat
+                [],//Covei
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Craiova
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Giurgita
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Goicea
+                [],//Macesu de sus
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Plosca
+                [],//Sapata
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Segarcea
+            ],
+            // Craiova
+            [
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],// Barca
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Bistret
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Calopar
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Carna
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Catane
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Cerat
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Covei
+                [],//Craiova
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Giurgita
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Goicea
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Macesu de sus
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Plosca
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Sapata
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Segarcea
+            ],
+            // Giurgita
+            [
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],// Barca
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Bistret
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Calopar
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Carna
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Catane
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Cerat
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Covei
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Craiova
+                [],//Giurgita
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Goicea
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Macesu de sus
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Plosca
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Sapata
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Segarcea
+            ],
+            // Goicea
+            [
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],// Barca
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Bistret
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Calopar
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Carna
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Catane
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Cerat
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Covei
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Craiova
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Giurgita
+                [],//Goicea
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Macesu de sus
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Plosca
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Sapata
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Segarcea
+            ],
+            // Macesu de sus
+            [
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],// Barca
+                [],//Bistret
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Calopar
+                [],//Carna
+                [],//Catane
+                [],//Cerat
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Covei
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Craiova
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Giurgita
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Goicea
+                [],//Macesu de sus
+                [],//Plosca
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Sapata
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Segarcea
+            ],
+            // Plosca
+            [
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],// Barca
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Bistret
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Calopar
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Carna
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Catane
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Cerat
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Covei
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Craiova
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Giurgita
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Goicea
+                [],//Macesu de sus
+                [],//Plosca
+                [],//Sapata
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Segarcea
+            ],
+            // Sapata
+            [
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],// Barca
+                [],//Bistret
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Calopar
+                [],//Carna
+                [],//Catane
+                [],//Cerat
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Covei
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Craiova
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Giurgita
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Goicea
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Macesu de sus
+                [],//Plosca
+                [],//Sapata
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Segarcea
+            ],
+            // Segarcea
+            [
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],// Barca
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Bistret
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Calopar
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Carna
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Catane
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Cerat
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Covei
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Craiova
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Giurgita
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Goicea
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Macesu de sus
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Plosca
+                [['00:00','00:00','00:00','00:00'],['00:00','00:00']],//Sapata
+                [],//Segarcea
+            ],
+        ]
+        
+        const parinte = document.getElementById('tableSpace')
+        const trigger = document.getElementById('trigger')
+        
+        const lvText = document.createElement('th')
+        lvText.textContent="Luni-Vineri"
+        const sdText = document.createElement('th')
+        sdText.textContent="Sambata-Duminica"
+
+        const lv = document.getElementById('lv')
+        const sd = document.getElementById('sd')
+
+        const plecare = document.getElementById('plecare');
+           
+        const sosire = document.getElementById('sosire');
+        const sosireText = document.getElementById('sosireText');
+        
+        const basicOption = document.createElement('option')
+        basicOption.textContent = "Selecteaza locul de sosire"
+        basicOption.disabled = true
+        basicOption.selected = true
+        basicOption.value = ""
+
+
+        plecare.addEventListener('change', function() {
+            const selectedValue = Number(parseInt(plecare.value, 10));
+            
+            //dam delete
+            sosire.innerHTML='';
+            sosire.classList.remove('disabled');
+            sosireText.classList.remove('disabled');
+            sosire.appendChild(basicOption);
+            
+            const v = ore[selectedValue]
+            for (let i = 0; i < v.length; i++) if(v[i].length>0){
+                const option = document.createElement('option');
+                option.textContent = localitati[i];
+                option.value = i;
+                sosire.appendChild(option);                   
+            }
+
+        });
+
+        trigger.addEventListener('click', function() {
+            const pid = Number(parseInt(plecare.value, 10));
+            const pname = localitati[pid]
+            const sid = Number(parseInt(sosire.value, 10));
+            const sname = localitati[sid]
+
+            const text = document.getElementById('titlu');
+            console.log(text)
+            text.textContent = "Plecari din " + pname + " catre " + sname;
+            lv.innerHTML=''
+            sd.innerHTML=''
+            lv.appendChild(lvText)
+            sd.appendChild(sdText)
+            
+            for(let i=0; i < ore[pid][sid][0].length; i++){
+                const val = document.createElement('td');
+                val.textContent = ore[pid][sid][0][i];
+                lv.appendChild(val);         
+            }
+
+            for(let i=0; i < ore[pid][sid][1].length; i++){
+                const val = document.createElement('td');
+                val.textContent = ore[pid][sid][1][i];
+                sd.appendChild(val);         
+            }
+
+        });
+
+    </script>
+</html>

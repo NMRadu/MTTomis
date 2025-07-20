@@ -1,0 +1,231 @@
+<!doctype html>
+<html>
+    <body style="width: 100%;">
+        <div class="header">
+            <div class="left-header">
+                M&T Tomis
+            </div>
+            <div class="right-header">
+                <div class="select-slot">
+                    <div id="programDiv" class="option">Program</div>
+                    <div class="option">Contact</div>
+                    <div class="option">Excursii</div>
+                </div>
+            </div>
+        </div>
+        <div class="title">
+            <div class="title-container">
+                <div style="font-size: 4vw; font-weight: bolder;">Ajungi oriunde in Dolj cu usurinta</div>
+                <div style="font-size: 1.6vw; font-weight: bold">Oferim transport public de incredere si excursii la preturi rezonabile</div>
+            </div>
+        </div>
+        <div class="services">
+            <div style="width: 80%; height: 70%;">
+                <div style="width: 100%;height: 13%; font-size: 2.5vw;">Servicile noastre</div>
+                <div class="services-space">
+                    <div class="service-container">
+                        <div class="service-container-padded">
+                            <image class="service-container-top" src="images/transport.jpeg"></image>
+                            <div class="service-container-bottom">
+                                <div style="font-size: 1.75vw;">Curse Regulate</div>
+                                <div style="font-size: 0.9vw;">Lorem, ipsum dolor sit amet consectetur adipisicing elit orem, ipsum dolor sit amet consectetur adipisicing elit</div>
+                                <button class="button-special">Program si preturi</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service-container">
+                        <div class="service-container-padded">
+                            <image class="service-container-top" src="images/ocazionale.jpeg"></image>
+                            <div class="service-container-bottom">
+                                <div style="font-size: 1.75vw;">Curse Ocazionale</div>
+                                <div style="font-size: 0.9vw;">Lorem, ipsum dolor sit amet consectetur adipisicing elit orem, ipsum dolor sit amet consectetur adipisicing elit</div>
+                                <button class="button-special">Program si preturi</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service-container">
+                        <div class="service-container-padded">
+                            <image class="service-container-top" src="images/speciale.jpeg"></image>
+                            <div class="service-container-bottom">
+                                <div style="font-size: 1.75vw;">Curse Speciale</div>
+                                <div style="font-size: 0.9vw;">Lorem, ipsum dolor sit amet consectetur adipisicing elit orem, ipsum dolor sit amet consectetur adipisicing elit</div>
+                                <button class="button-special">Program si preturi</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="about">
+            <div class="aboutbox">
+                <h3 style="font-size: calc((15px + 0.390625vw)*1.3);">
+                    Despre noi
+                </h3>
+                <p style="font-size: calc((15px + 0.390625vw)*1);">
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorum voluptatum explicabo mollitia molestiae dolorem. Maiores atque explicabo velit excepturi sapiente, nam officiis eaque nemo beatae quod magnam perferendis aut ex!
+                </p>
+                <p style="font-size: calc((15px + 0.390625vw)*1);">
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorum voluptatum explicabo mollitia molestiae dolorem. Maiores atque explicabo velit excepturi sapiente, nam officiis eaque nemo beatae quod magnam perferendis aut ex!
+                </p>
+            </div>
+        </div>
+        <div class="gallery">
+            
+            <div style="height: 70%; width: 80%; display: flex; align-items: center; justify-content: center;">
+                <image class="gallery-iamge" src="images/ocazionale.jpeg"></image>
+                <image class="gallery-iamge" src="images/ocazionale.jpeg"></image>
+                <image class="gallery-iamge" src="images/ocazionale.jpeg"></image>
+            </div>
+        </div>
+    </body>
+    <style>
+        body{
+            margin: 0;
+            overflow-x: hidden;
+        }
+        .header {
+            width: 100%;
+            height: 8vh;
+            background-color: red;
+            display: flex;
+
+        }
+        .title{
+            background-image: url("images/title2.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            height: 80vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+        .left-header{
+            width: 48%;
+            margin-left: 2%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            color: white!important;
+            font-size: 1.5vw;
+        }
+        .right-header{
+            width: 48%;
+            height: 100%;
+            display: flex;
+            justify-content: end;
+            color: white!important;
+            font-size: 1.2vw;
+        }
+        .select-slot{
+            display: flex;
+            justify-content: space-between;
+            height: 100%;width: 29%;
+            align-items: center;
+        }
+        .option:hover{
+            color: rgb(0, 0, 0)!important;
+            cursor: pointer;
+        }
+        .title-container{
+            height: 40%;
+            background-color: rgba(0, 0, 0, 0.7);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            width: 45%;
+            margin-left: 10%;
+            color: red!important;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .services{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 90vh;
+        }
+        .about{
+            width: 100vw;
+            height: 80vh;
+            background-color: red;
+        }
+        .aboutbox{
+            padding-top: 5%;
+            margin-left: 10%;
+            width: 70%;
+            height: 60%;
+        }
+        .gallery{
+            width: 100vw;
+            height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .services-space{
+            width: 100%;
+            height: 87%;
+            display: flex;
+        }
+        .service-container{
+            width: 33.3%;
+            height: 100%;
+        }
+        .service-container-padded{
+            width: 94%;
+            height: 86%;
+        }
+        .service-container-top{
+            margin: auto;
+            display: block;
+            width: 0px;
+            height: 0px;
+            min-width: 100%;
+            max-width: 100%;
+            min-height: 59%;
+            max-height: 100%;
+            object-fit: cover;
+            object-position: center center;
+        }
+        .gallery-iamge{
+            margin: auto;
+            display: block;
+            width: 0px;
+            height: 0px;
+            min-width: 31.302%;
+            max-width: 100%;
+            min-height: 50.0074%;
+            max-height: 100%;
+            object-fit: cover;
+            object-position: center center;
+        }
+        .service-container-bottom{
+            width: 100%;
+            margin-top: 5%;
+            height: 36%;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+        }
+        .button-special{
+            width: 23%;
+            height: 29%;
+            border: 0;
+            font-size: 0.9vw;
+            background-color: red;
+        }
+        .button-special:hover{
+            background-color: gray;
+            color: white;
+        }
+    </style> 
+    <script>
+        document.getElementById("programDiv").addEventListener("click", function() {
+            // Navigate to the desired HTML page
+            window.location.href = "test2.html";
+        });
+    </script>
+</html>
+

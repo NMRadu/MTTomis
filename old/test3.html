@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>M&T Tomis - Program</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="m-0 p-0 w-full min-h-screen overflow-x-hidden">
+  <header 
+    class="w-full h-[8vh] bg-red-600 flex items-center justify-between px-4 sm:px-8">
+
+    <div class="text-white font-bold sm:text-3xl">
+      M&T Tomis
+    </div>
+    <div class="flex space-x-4 sm:space-x-8 text-white sm:text-xl">
+      <div class="hover:text-black cursor-pointer transition-colors">
+        Program
+      </div>
+      <div class="hover:text-black cursor-pointer transition-colors">
+        Contact
+      </div>
+      <div class="hover:text-black cursor-pointer transition-colors">
+        Excursii
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <section 
+    class="w-full flex items-start sm:items-center justify-center py-4 sm:py-10 min-h-[92vh]"
+  >
+    <div 
+      class="flex flex-col items-center space-y-6 w-[80vw] max-w-[1200px]"
+    >
+      <div class="flex flex-col w-full">
+        <label 
+          for="plecare"
+          class="block font-semibold mb-2 lg:text-xl md:text-5xl">
+          Locul de plecare
+        </label>
+        <select 
+          name="plecare" 
+          id="plecare"
+          class="w-full h-[6vh] border border-gray-300 rounded-lg px-3 lg:text-lg md:text-4xl focus:outline-none focus:ring-2 focus:ring-red-600"
+        >
+          <option disabled selected value="">Selecteaza locul de plecare</option>
+          <option value="0">Barca</option>
+          <option value="1">Bistret</option>
+          <option value="2">Calopar</option>
+          <option value="3">Carna</option>
+          <option value="4">Catane</option>
+          <option value="5">Cerat</option>
+          <option value="6">Covei</option>
+          <option value="7">Craiova</option>
+          <option value="8">Giurgita</option>
+          <option value="9">Goicea</option>
+          <option value="10">Macesu de Sus</option>
+          <option value="11">Plosca</option>
+          <option value="12">Sapata</option>
+          <option value="13">Segarcea</option>
+        </select>
+      </div>
+
+      <!-- Dropdown "Locul de sosire" -->
+      <div class="flex flex-col w-full">
+        <label
+          for="sosire"
+          id="sosireText"
+          class="block font-semibold mb-2 lg:text-xl md:text-5xl opacity-20 pointer-events-none"
+        >
+          Locul de sosire
+        </label>
+        <select
+          name="sosire"
+          id="sosire"
+          class="w-full h-[6vh] border border-gray-300 rounded-lg px-3 lg:text-lg md:text-4xl opacity-20 pointer-events-none cursor-not-allowed"
+        >
+        </select>
+      </div>
+
+      <button
+        id="trigger"
+        class="w-full h-[6vh] border border-gray-300 rounded-lg text-gray-700 hover:bg-red-600 hover:text-white transition-colors font-semibold lg:text-lg md:text-4xl"
+      >
+        Cauta
+      </button>
+
+      <div id="tableSpace" class="flex flex-col items-center w-full space-y-4">
+        <h2 
+          id="titlu"
+          class="font-bold text-centerlg:text-xl md:text-5xl"
+        ></h2>
+
+        <div 
+          class="w-full border border-gray-300 rounded-lg overflow-x-auto lg:text-lg md:text-4xl"
+        >
+          <table 
+            class="min-w-full border-collapse sm:text-base"
+          >
+            <tbody>
+              <tr id="lv" class="border border-gray-300 lg:text-lg md:text-4xl"></tr>
+              <tr id="sd" class="border border-gray-300 lg:text-lg md:text-4xl"></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Script -->
+  <script>
+    // Same data & logic as the original page
+    const localitati = [
+      'Barca','Bistret','Calopar','Carna','Catane','Cerat','Covei','Craiova',
+      'Giurgita','Goicea','Macesu de Sus','Plosca','Sapata','Segarcea'
+    ];
+
+    const ore = [
+      // Barca
+      [
+        [], // Barca
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Bistret
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Calopar
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Carna
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Catane
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Cerat
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Covei
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Craiova
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Giurgita
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Goicea
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Macesu de Sus
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Plosca
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Sapata
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Segarcea
+      ],
+      // Bistret
+      [
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Barca
+        [], // Bistret
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Calopar
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Carna
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Catane
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Cerat
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Covei
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Craiova
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Giurgita
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Goicea
+        [], // Macesu de Sus
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Plosca
+        [], // Sapata
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Segarcea
+      ],
+      // Calopar
+      [
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Barca
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Bistret
+        [], // Calopar
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Carna
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Catane
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Cerat
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Covei
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Craiova
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Giurgita
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Goicea
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Macesu de Sus
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Plosca
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Sapata
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Segarcea
+      ],
+      // Carna
+      [
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Barca
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Bistret
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Calopar
+        [], // Carna
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Catane
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Cerat
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Covei
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Craiova
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Giurgita
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Goicea
+        [], // Macesu de Sus
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Plosca
+        [], // Sapata
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Segarcea
+      ],
+      // Catane
+      [
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Barca
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Bistret
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Calopar
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Carna
+        [], // Catane
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Cerat
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Covei
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Craiova
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Giurgita
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Goicea
+        [], // Macesu de Sus
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Plosca
+        [], // Sapata
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Segarcea
+      ],
+      // Cerat
+      [
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Barca
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Bistret
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Calopar
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Carna
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Catane
+        [], // Cerat
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Covei
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Craiova
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Giurgita
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Goicea
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Macesu de Sus
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Plosca
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Sapata
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Segarcea
+      ],
+      // Covei
+      [
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Barca
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Bistret
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Calopar
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Carna
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Catane
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Cerat
+        [], // Covei
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Craiova
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Giurgita
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Goicea
+        [], // Macesu de Sus
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Plosca
+        [], // Sapata
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Segarcea
+      ],
+      // Craiova
+      [
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Barca
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Bistret
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Calopar
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Carna
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Catane
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Cerat
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Covei
+        [], // Craiova
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Giurgita
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Goicea
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Macesu de Sus
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Plosca
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Sapata
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Segarcea
+      ],
+      // Giurgita
+      [
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Barca
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Bistret
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Calopar
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Carna
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Catane
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Cerat
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Covei
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Craiova
+        [], // Giurgita
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Goicea
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Macesu de Sus
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Plosca
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Sapata
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Segarcea
+      ],
+      // Goicea
+      [
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Barca
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Bistret
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Calopar
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Carna
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Catane
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Cerat
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Covei
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Craiova
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Giurgita
+        [], // Goicea
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Macesu de Sus
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Plosca
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Sapata
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Segarcea
+      ],
+      // Macesu de Sus
+      [
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Barca
+        [], // Bistret
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Calopar
+        [], // Carna
+        [], // Catane
+        [], // Cerat
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Covei
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Craiova
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Giurgita
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Goicea
+        [], // Macesu de Sus
+        [], // Plosca
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Sapata
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Segarcea
+      ],
+      // Plosca
+      [
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Barca
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Bistret
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Calopar
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Carna
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Catane
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Cerat
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Covei
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Craiova
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Giurgita
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Goicea
+        [], // Macesu de Sus
+        [], // Plosca
+        [], // Sapata
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Segarcea
+      ],
+      // Sapata
+      [
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Barca
+        [], // Bistret
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Calopar
+        [], // Carna
+        [], // Catane
+        [], // Cerat
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Covei
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Craiova
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Giurgita
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Goicea
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Macesu de Sus
+        [], // Plosca
+        [], // Sapata
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Segarcea
+      ],
+      // Segarcea
+      [
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Barca
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Bistret
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Calopar
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Carna
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Catane
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Cerat
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Covei
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Craiova
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Giurgita
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Goicea
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Macesu de Sus
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Plosca
+        [['00:00','00:00','00:00','00:00'],['00:00','00:00']], // Sapata
+        [], // Segarcea
+      ],
+    ];
+
+    const parinte = document.getElementById('tableSpace');
+    const trigger = document.getElementById('trigger');
+    const lv = document.getElementById('lv');
+    const sd = document.getElementById('sd');
+
+    const plecare = document.getElementById('plecare');
+    const sosire = document.getElementById('sosire');
+    const sosireText = document.getElementById('sosireText');
+
+    // Pre-create these TH nodes (we'll re-append them each time we do a new search)
+    const lvText = document.createElement('th');
+    lvText.textContent = "Luni-Vineri";
+    const sdText = document.createElement('th');
+    sdText.textContent = "Sambata-Duminica";
+    
+    const basicOption = document.createElement('option');
+    basicOption.textContent = "Selecteaza locul de sosire";
+    basicOption.disabled = true;
+    basicOption.selected = true;
+    basicOption.value = "";
+
+    // When plecare changes, enable sosire
+    plecare.addEventListener('change', function() {
+      const selectedValue = parseInt(plecare.value, 10);
+      sosire.innerHTML = '';
+      sosire.classList.remove('opacity-20', 'pointer-events-none', 'cursor-not-allowed');
+      sosireText.classList.remove('opacity-20', 'pointer-events-none');
+
+      // Re-insert the basic option for sosire
+      // (Important to create a fresh clone or new element each time
+      //  otherwise it might "move" instead of re-render.)
+      const newBasicOption = basicOption.cloneNode(true);
+      sosire.appendChild(newBasicOption);
+
+      // Populate the dropdown based on available data
+      const v = ore[selectedValue];
+      for (let i = 0; i < v.length; i++) {
+        // Only show if there is a schedule array for that route
+        if (v[i].length > 0) {
+          const option = document.createElement('option');
+          option.textContent = localitati[i];
+          option.value = i;
+          sosire.appendChild(option);
+        }
+      }
+    });
+
+    // Handle the "Cauta" button click
+    trigger.addEventListener('click', function() {
+      const pid = parseInt(plecare.value, 10);
+      const sid = parseInt(sosire.value, 10);
+
+      // Ensure a valid selection
+      if (isNaN(pid) || isNaN(sid)) {
+        alert("Te rugăm să selectezi locul de plecare și de sosire.");
+        return;
+      }
+
+      const pname = localitati[pid];
+      const sname = localitati[sid];
+      const text = document.getElementById('titlu');
+      text.textContent = "Plecari din " + pname + " catre " + sname;
+
+      // Clear the old results
+      lv.innerHTML = '';
+      sd.innerHTML = '';
+
+      // Re-append the TH elements
+      lv.appendChild(lvText);
+      sd.appendChild(sdText);
+
+      // Insert times for Luni-Vineri
+      for (let i = 0; i < ore[pid][sid][0].length; i++) {
+        const val = document.createElement('td');
+        val.className = "border border-gray-300 p-2";
+        val.textContent = ore[pid][sid][0][i];
+        lv.appendChild(val);
+      }
+
+      // Insert times for Sambata-Duminica
+      for (let i = 0; i < ore[pid][sid][1].length; i++) {
+        const val = document.createElement('td');
+        val.className = "border border-gray-300 p-2";
+        val.textContent = ore[pid][sid][1][i];
+        sd.appendChild(val);
+      }
+    });
+  </script>
+</body>
+</html>

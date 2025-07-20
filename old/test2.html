@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>M&T Tomis</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="m-0 p-0 w-full overflow-x-hidden">
+
+  <!-- Header -->
+  <header class="w-full h-24 sm:h-28 bg-red-600 flex items-center justify-between px-6 sm:px-8">
+    <div class="text-white text-2xl sm:text-3xl font-bold">
+      M&T Tomis
+    </div>
+    <div class="flex space-x-8 sm:space-x-10 text-white text-lg sm:text-xl">
+      <div id="programDiv" class="hover:text-black cursor-pointer transition-colors">
+        Program
+      </div>
+      <div class="hover:text-black cursor-pointer transition-colors">
+        Contact
+      </div>
+      <div class="hover:text-black cursor-pointer transition-colors">
+        Excursii
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section 
+  class="w-full h-[30vh] sm:h-[50vh] md:h-[70vh] lg:h-screen bg-cover bg-center flex items-center"
+  style="background-image: url('images/title2.jpg');"
+>
+  <div class="bg-black bg-opacity-70 text-red-600 text-center p-6 sm:p-8 ml-4 sm:ml-10 w-11/12 sm:w-2/5">
+    <h1 class="text-xl sm:text-3xl md:text-5xl font-extrabold mb-4">
+      Ajungi oriunde in Dolj cu usurinta
+    </h1>
+    <p class="text-sm sm:text-lg md:text-2xl font-bold">
+      Oferim transport public de incredere si excursii la preturi rezonabile
+    </p>
+  </div>
+</section>
+
+  <!-- Services Section -->
+  <section class="w-full py-10 sm:py-16 flex items-center justify-center">
+    <div class="w-11/12 md:w-4/5">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 text-center">
+        Servicile noastre
+      </h2>
+      <div class="flex flex-col md:flex-row md:space-x-4 space-y-6 md:space-y-0">
+        <!-- Service 1 -->
+        <div class="flex-1 flex flex-col items-center text-center px-2">
+          <img 
+            src="images/transport.jpeg"
+            alt="Curse Regulate"
+            class="w-full h-40 sm:h-2/3 object-cover object-center rounded-lg"
+          />
+          <div class="mt-4">
+            <h3 class="text-lg sm:text-xl md:text-2xl font-semibold">Curse Regulate</h3>
+            <p class="text-sm md:text-base mt-2">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            </p>
+            <button class="bg-red-600 text-white px-4 py-2 hover:bg-gray-600 transition-colors text-sm md:text-base mt-4">
+              Program si preturi
+            </button>
+          </div>
+        </div>
+        <!-- Service 2 -->
+        <div class="flex-1 flex flex-col items-center text-center px-2">
+          <img 
+            src="images/ocazionale.jpeg"
+            alt="Curse Ocazionale"
+            class="w-full h-40 sm:h-2/3 object-cover object-center rounded-lg"
+          />
+          <div class="mt-4">
+            <h3 class="text-lg sm:text-xl md:text-2xl font-semibold">Curse Ocazionale</h3>
+            <p class="text-sm md:text-base mt-2">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            </p>
+            <button class="bg-red-600 text-white px-4 py-2 hover:bg-gray-600 transition-colors text-sm md:text-base mt-4">
+              Program si preturi
+            </button>
+          </div>
+        </div>
+        <!-- Service 3 -->
+        <div class="flex-1 flex flex-col items-center text-center px-2">
+          <img 
+            src="images/speciale.jpeg"
+            alt="Curse Speciale"
+            class="w-full h-40 sm:h-2/3 object-cover object-center rounded-lg"
+          />
+          <div class="mt-4">
+            <h3 class="text-lg sm:text-xl md:text-2xl font-semibold">Curse Speciale</h3>
+            <p class="text-sm md:text-base mt-2">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            </p>
+            <button class="bg-red-600 text-white px-4 py-2 hover:bg-gray-600 transition-colors text-sm md:text-base mt-4">
+              Program si preturi
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="w-full py-10 sm:py-16 bg-red-600 text-white">
+    <div class="w-11/12 md:w-4/5 mx-auto">
+      <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-center">
+        Despre noi
+      </h3>
+      <p class="text-sm md:text-base leading-relaxed mb-4">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorum voluptatum explicabo mollitia molestiae dolorem. Maiores atque explicabo velit excepturi sapiente.
+      </p>
+      <p class="text-sm md:text-base leading-relaxed">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorum voluptatum explicabo mollitia molestiae dolorem. Maiores atque explicabo velit excepturi sapiente.
+      </p>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="w-full py-10 sm:py-16 flex items-center justify-center">
+    <div class="w-11/12 md:w-4/5 flex flex-wrap justify-center gap-4">
+      <img 
+        src="images/ocazionale.jpeg"
+        alt="Gallery Image 1"
+        class="w-32 sm:w-40 md:w-1/4 h-32 sm:h-40 md:h-auto object-cover object-center rounded-lg"
+      />
+      <img 
+        src="images/ocazionale.jpeg"
+        alt="Gallery Image 2"
+        class="w-32 sm:w-40 md:w-1/4 h-32 sm:h-40 md:h-auto object-cover object-center rounded-lg"
+      />
+      <img 
+        src="images/ocazionale.jpeg"
+        alt="Gallery Image 3"
+        class="w-32 sm:w-40 md:w-1/4 h-32 sm:h-40 md:h-auto object-cover object-center rounded-lg"
+      />
+    </div>
+  </section>
+
+  <!-- Script for navigation -->
+  <script>
+    document.getElementById("programDiv").addEventListener("click", function() {
+      window.location.href = "test3.html";
+    });
+  </script>
+</body>
+</html>
