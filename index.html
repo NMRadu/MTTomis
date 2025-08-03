@@ -59,6 +59,7 @@
                                  <ul>
                                      <li><a data-scroll href="#body">Acasă <i class="pe-7s-home"></i></a><span class="menu-effect"></span></li>
                                      <li><a data-scroll href="#services">Servicii <i class="pe-7s-config"></i></a><span class="menu-effect"></span></li>
+                                     <li><a data-scroll href="#program">Program Curse <i class="pe-7s-clock"></i></a><span class="menu-effect"></span></li>
                                      <li><a data-scroll href="#galerie">Galerie Auto <i class="pe-7s-glasses"></i></a><span class="menu-effect"></span></li>
                                      <li><a data-scroll href="#contact">Contact <i class="pe-7s-help1"></i></a><span class="menu-effect"></span></li>
                                  </ul>
@@ -82,8 +83,17 @@
                         <div class="services">
                             <div class="service-wrap">    
                                 <i class="pe-7s-map pe-dj pe-va"></i>
-                                <h3>Curse intrajudețene</h3>
+                                <h3 style="color:inherit;text-decoration:none;cursor:pointer;">Curse intrajudețene</h3>
                                 <p>Transport persoane pe rute locale în județul Dolj, rapid și sigur.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="services">
+                            <div class="service-wrap">    
+                                <i class="pe-7s-global pe-dj pe-va"></i>
+                                <h3 style="color:inherit;text-decoration:none;cursor:pointer;">Curse interjudețene</h3>
+                                <p>Transport persoane între județe, confortabil și sigur pentru distanțe lungi.</p>
                             </div>
                         </div>
                     </div>
@@ -96,6 +106,7 @@
                             </div>
                         </div>
                     </div>
+                    <!--
                     <div class="col-md-3 col-sm-6">
                         <div class="services">
                             <div class="service-wrap">
@@ -105,12 +116,13 @@
                             </div>
                         </div>
                     </div>
+                    -->
                     <div class="col-md-3 col-sm-6">
                         <div class="services">
                             <div class="service-wrap">
                                 <i class="pe-7s-key pe-dj pe-va"></i>
-                                <h3>Închiriere dubă</h3>
-                                <p>Dubă disponibila pentru închiriere cu șofer, pentru orice destinație.</p>
+                                <h3>Închiriere vehicul 8+1</h3>
+                                <p>Vehicul 8+1 disponibil pentru închiriere cu șofer, pentru orice destinație.</p>
                             </div>
                         </div>
                     </div>
@@ -131,6 +143,9 @@
                         <button class="program-btn" data-img="program/Craiova-Covei.png">Craiova - Covei</button>
                         <button class="program-btn" data-img="program/Craiova-Sapata.png">Craiova - Sapata</button>
                         <button class="program-btn" data-img="program/Sapata-Craiova.png">Sapata - Craiova</button>
+                        <button class="program-btn" data-img="program/Craiova-Radinesti-Obarsia.png">Craiova - Radinesti - Obarsia</button>
+                        <button class="program-btn" data-img="program/Obarsia-Radinesti-Craiova.png">Obarsia - Radinesti - Craiova</button>
+                        <button class="program-btn" data-img="program/Bals-Morunglav.png">Bals - Morunglav</button>
                         <style>
                         .program-btn {
                             background: linear-gradient(90deg, #232526 0%, #414345 100%);
@@ -288,6 +303,17 @@
         <script src="assets/js/smooth-scroll.js"></script>
         <script src="assets/js/owl.carousel.js"></script>
         <script src="assets/js/script.js"></script>
+        <script>
+        // Smooth scroll for Curse intrajudețene and interjudețene (whole service-wrap clickable)
+        $(document).ready(function(){
+            $('.service-wrap').slice(0,2).css('cursor', 'pointer');
+            $('.service-wrap').slice(0,2).on('click', function(e){
+                $('html, body').animate({
+                    scrollTop: $('#program').offset().top - 40
+                }, 600);
+            });
+        });
+        </script>
         <script>
         // Program modal functionality
         $(document).ready(function(){
